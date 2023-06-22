@@ -22,3 +22,11 @@ class RegisterView(FormView):
     def form_valid(self, form):
         form.save()  # save the user
         return super().form_valid(form)
+    
+
+def check_username(request):
+    username = request.POST.get('username')
+    if get_user_model().objects.filter(username=username).exists():
+        return HttpResponse('bing bong')
+    else:
+        return HttpResponse('badda bing')
